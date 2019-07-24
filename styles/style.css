@@ -1,0 +1,62 @@
+@import url(_flex.css);
+@import url(_spacing.css);
+body { margin: 0; }
+
+a img { border: 0px; }
+
+.color-white { color: white; }
+
+.hide { display: none; }
+
+.mdl-textfield--expandable { width: auto; }
+
+.logo-image { height: 80px; width: 80px; }
+
+.header { overflow: visible; background-color: #6acaf9; }
+
+.navigation-list { color: #757575; font-weight: 500; font-size: 14px; cursor: pointer; }
+.navigation-list:hover { background-color: #e0e0e0; }
+.navigation-list#create_store:hover { background-color: #4CAF50; color: white; }
+
+.mdl-menu .mdl-menu__item:hover { color: white; }
+.mdl-menu .mdl-menu__item:hover.edit-icon { background-color: #6acaf9; }
+.mdl-menu .mdl-menu__item:hover.delete-icon { background-color: #ff4081; }
+.mdl-menu .mdl-menu__item:hover.export-icon, .mdl-menu .mdl-menu__item:hover.import-icon { background-color: #4CAF50; }
+.mdl-menu .mdl-menu__item a { color: inherit; font-weight: inherit; }
+
+.mdl-dialog { width: 75vw; top: 5vh; }
+
+.mdl-dialog-close { position: absolute; right: -18px; top: -12px; }
+
+.mdl-dialog-close .material-icons { transform: translate(-12px, -12px) rotate(0deg); transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+.mdl-dialog-close:hover .material-icons { transform: translate(-12px, -12px) rotate(180deg); }
+
+.mdl-button { transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+
+#create-btn:hover { color: white; background-color: #4CAF50; }
+
+#delete-btn:hover { color: white; background-color: #ff4081; }
+
+.drawer .mdl-layout-title { position: relative; background: #6acaf9; height: 100px; padding-left: 16px; padding-right: 16px; padding-top: 20px; }
+.drawer .mdl-layout-title .title { font-size: 20px; color: white; }
+
+.mdl-button--fab.mdl-button--colotheme { background-color: #6acaf9; color: #fff; }
+
+.mdl-textfield { width: 100%; max-width: 100%; }
+
+.mdl-dialog__title .mdl-textfield__input, .mdl-dialog__title .mdl-textfield__label { font-size: 24px; }
+
+.main-table-card { width: auto; margin: 15px; opacity: 0; margin-bottom: 150px; transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+.main-table-card.show { opacity: 1; }
+
+.add-btn { position: fixed; bottom: 50px; right: 50px; z-index: 50; }
+
+table.dataTable .mdl-textfield { padding: 0; }
+table.dataTable tr td { padding: 8px 14px; }
+table.dataTable tr td .mdl-textfield__input { border-color: transparent; }
+table.dataTable tr td .mdl-textfield__label { opacity: 0; transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1); }
+table.dataTable tr td .mdl-textfield__label:after { bottom: 0; }
+table.dataTable tr:hover .mdl-textfield__label { opacity: 1; }
+table.dataTable tr:hover .mdl-textfield__input { border-color: rgba(0, 0, 0, 0.12); }
+
+/*# sourceMappingURL=style.css.map */

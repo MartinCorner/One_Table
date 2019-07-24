@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>One Table</title>
+
+    <!-- Page styles -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="./lib/mdl/material.min.css">
+    <link rel="stylesheet" href="./lib/mdl/getmdl-select.min.css">
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" type="text/css" href="./lib/DataTables-1.10.18/datatables.min.css">
+  </head>
+  <body>
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+
+      <div class="header mdl-layout__header mdl-layout__header--waterfall">
+        <div class="mdl-layout__header-row">
+          <span class="mdl-layout-title header-title">One Table</span>
+          <!-- Add spacer, to align navigation to the right in desktop -->
+          <div class="mdl-layout-spacer"></div>
+          <!-- Navigation -->
+          <button class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect" id="more-button">
+            <i class="material-icons">more_vert</i>
+          </button>
+          <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
+            <li class="mdl-menu__item d-flex align-items-center edit-icon"><i class="material-icons mr-2">edit</i>Edit</li>
+            <li class="mdl-menu__item d-flex align-items-center delete-icon"><i class="material-icons mr-2">delete_forever</i>Delete</li>
+            <li class="mdl-menu__item export-icon"><a id="menu-export-icon" class="d-flex align-items-center"><i class="material-icons mr-2">save_alt</i>Export</a></li>
+            <li class="mdl-menu__item import-icon"><a id="menu-import-icon" class="d-flex align-items-center"><i class="material-icons mr-2">cloud_upload</i>Import</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="drawer mdl-layout__drawer">
+        <div class="mdl-layout-title d-flex align-items-center justify-content-evenly">
+          <img class="logo-image" src="icon/icon.svg" width="50">
+          <p class="title">One Table</p>
+        </div>
+        <nav class="mdl-navigation">
+          <ul class="mdl-list">
+              <li class="mdl-list__item navigation-list" id="create_store">
+                <span class="mdl-list__item-primary-content"><i class="material-icons mr-2">note_add</i>Create</span>
+              </li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="mdl-layout__content">
+        <div class="mdl-card mdl-shadow--2dp main-table-card">
+          <table id="main-table" class="dataTable hover row-border"></table>
+        </div>
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored mdl-shadow--4dp mdl-color--accent add-btn" id="add-btn" data-upgraded=",MaterialButton,MaterialRipple">
+          <i class="material-icons" role="presentation">add</i>
+          <span class="visuallyhidden">Add</span>
+          <span class="mdl-button__ripple-container"><span class="mdl-ripple is-animating" style="width: 160.392px; height: 160.392px; transform: translate(-50%, -50%) translate(24px, 29px);"></span></span></button>
+      </div>
+
+      <dialog id="new_store" class="mdl-dialog">
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-dialog-close"><i class="material-icons">close</i></button>
+        <div class="mdl-dialog__title">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" id="new_store_name">
+            <label class="mdl-textfield__label" for="new_store_name">Table Name</label>
+            <span class="mdl-textfield__error">required filed</span>
+          </div>
+        </div>
+        <div class="mdl-dialog__content">
+          <div class="new_store_form">
+            <div class="new_store_row new_store_add_btn_row mt-4">
+              <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colotheme" id="new_store_add_row"><i class="material-icons">add</i></button>
+            </div>
+          </div>
+        </div>
+        <div class="mdl-dialog__actions">
+          <button type="button" class="mdl-button" id="create-btn">Create</button>
+        </div>
+      </dialog>
+      <dialog id="delete_store" class="mdl-dialog">
+        <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored mdl-dialog-close"><i class="material-icons">close</i></button>
+        <div class="mdl-dialog__title">This will DELETE the stored data, are you sure?</div>
+        <div class="mdl-dialog__content"></div>
+        <div class="mdl-dialog__actions">
+          <button type="button" class="mdl-button" id="delete-btn">DELETE</button>
+        </div>
+      </dialog>
+      <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+        <div class="mdl-snackbar__text"></div>
+        <button class="mdl-snackbar__action" type="button"></button>
+      </div>
+      <a id="download_link" class="hide"></a>
+    </div>
+
+    <script id="all_tables_navigation" type="text/html">
+        {{each _tables value i}}
+        <li class="mdl-list__item navigation-list" id="" data-name="{{value}}">
+          <span class="mdl-list__item-primary-content"><i class="material-icons note-icon mr-2">description</i>{{value}}</span>
+        </li>
+        {{/each}}
+    </script>
+    <script id="new_store_form_iterate" type="text/html">
+      <div class="new_store_row d-flex">
+        <div class="mr-3" style="flex: 1 1;">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input new_store_title_input" type="text" id="new_store_title_{{_new_store_name_seq}}">
+            <label class="mdl-textfield__label" for="new_store_title_{{_new_store_name_seq}}">Title</label>
+            <span class="mdl-textfield__error">required filed</span>
+          </div>
+        </div>
+        <div class="mr-3" style="flex: 1 1;">
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select">
+            <input type="text" value="" class="mdl-textfield__input mdl-select__input new_store_datatype_input" id="new_store_datatype_{{_new_store_name_seq}}" readonly>
+            <input type="hidden" value="" class="mdl-select__input" name="new_store_datatype_{{_new_store_name_seq}}">
+            <label><i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i></label>
+            <label for="new_store_datatype_{{_new_store_name_seq}}" class="mdl-textfield__label">Data Type</label>
+            <span class="mdl-textfield__error">required filed</span>
+            <ul id="new_store_datatype_list" for="new_store_datatype_{{_new_store_name_seq}}" class="mdl-menu mdl-menu--bottom-left mdl-js-menu">
+              {{each _dataType value i}}
+              <li class="mdl-menu__item" data-val="">{{value}}</li>
+              {{/each}}
+            </ul>
+          </div>
+        </div>
+        <div class="d-flex" style="flex: 0 1;"><button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored new_store_del_row" id=""><i class="material-icons">delete</i></button></div>
+      </div>
+    </script>
+
+    <script type="text/javascript" charset="utf8" src="./lib/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="./lib/DataTables-1.10.18/datatables.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="./lib/mdl/material.js"></script>
+    <script type="text/javascript" charset="utf8" src="./lib/mdl/getmdl-select.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="./lib/localforage.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="./lib/template-web.js"></script>
+    <script type="text/javascript" charset="utf8" src="./script/script.js?v=0.1"></script>
+  </body>
+</html>

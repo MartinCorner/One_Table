@@ -1,0 +1,186 @@
+@import url(_flex.css);
+@import url(_spacing.css);
+
+$color-blue: #6acaf9;
+$color-success: #4CAF50;
+$color-failure: #ff4081;
+
+body {
+  margin: 0;
+}
+
+a img{
+  border: 0px;
+}
+
+.color-white {
+  color: white;
+}
+
+.hide {
+  display: none;
+}
+
+.mdl-textfield--expandable {
+  width: auto;
+}
+
+.logo-image {
+  height: 80px;
+  width: 80px;
+}
+
+.header {
+  overflow: visible;
+  background-color: $color-blue;
+}
+
+.navigation-list {
+  color: #757575;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  &:hover {
+    background-color: #e0e0e0;
+  }
+  &#create_store:hover {
+    background-color: $color-success;
+    color: white;
+  }
+}
+
+.mdl-menu{
+  .mdl-menu__item{
+    &:hover {
+      color: white;
+      &.edit-icon {
+        background-color: $color-blue;
+      }
+      &.delete-icon {
+        background-color: $color-failure;
+      }
+      &.export-icon,
+      &.import-icon {
+        background-color: $color-success;
+      }
+    }
+    a {
+      color: inherit;
+      font-weight: inherit;
+      text-decoration: none;
+    }
+  }
+}
+
+.mdl-dialog{
+  width: 75vw;
+  top: 5vh;
+}
+
+.mdl-dialog-close {
+  position: absolute;
+  right: -18px;
+  top: -12px;
+}
+
+.mdl-dialog-close {
+  .material-icons {
+    transform: translate(-12px, -12px) rotate(0deg);
+    transition: transform .2s cubic-bezier(.4, 0, .2, 1);
+  }
+  &:hover .material-icons {
+    transform: translate(-12px, -12px) rotate(180deg);
+  }
+}
+
+.mdl-button{
+  transition: color .2s cubic-bezier(.4, 0, .2, 1), background-color .2s cubic-bezier(.4, 0, .2, 1);
+}
+#create-btn {
+  &:hover {
+    color: white;
+    background-color: $color-success;
+  }
+}
+#delete-btn {
+  &:hover {
+    color: white;
+    background-color: $color-failure;
+  }
+}
+.drawer .mdl-layout-title {
+  position: relative;
+  background: #6acaf9;
+  height: 100px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 20px;
+  .title{
+    font-size: 20px;
+    color: white;
+  }
+}
+
+.mdl-button--fab.mdl-button--colotheme {
+  background-color: $color-blue;
+  color: #fff;
+}
+.mdl-textfield{
+  width: 100%;
+  max-width: 100%;
+}
+
+.mdl-dialog__title{
+  .mdl-textfield__input,
+  .mdl-textfield__label {
+    font-size: 24px;
+  }
+}
+
+.main-table-card{
+  width: auto;
+  margin: 15px;
+  opacity: 0;
+  margin-bottom: 150px;
+  transition: opacity .2s cubic-bezier(.4, 0, .2, 1);
+  &.show{
+    opacity: 1;
+  }
+}
+
+.add-btn {
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  z-index: 50;
+}
+
+table.dataTable {
+  .mdl-textfield {
+    padding: 0;
+  }
+
+  tr {
+    td {
+      padding: 8px 14px;
+      .mdl-textfield__input {
+        border-color: transparent;
+      }
+      .mdl-textfield__label {
+        opacity: 0;
+        transition: opacity .2s cubic-bezier(.4, 0, .2, 1);
+        &:after {
+          bottom: 0;
+        }
+      }
+    }
+    &:hover {
+      .mdl-textfield__label {
+        opacity: 1;
+      }
+      .mdl-textfield__input {
+        border-color: rgba(0, 0, 0, .12);
+      }
+    }
+  }
+}
