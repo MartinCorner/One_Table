@@ -4,4 +4,4 @@ DataTables: https://datatables.net
 
 localForage: https://localforage.github.io/localForage/
 
-art-template: https://aui.github.io/art-template/zh-cn/index.html
+art-template: https://aui.github.io/art-template/zh-cn/index.html https://github.com/aui/art-template
